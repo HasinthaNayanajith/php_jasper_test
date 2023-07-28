@@ -23,10 +23,10 @@ class Report
 
     public function generate_report()
     {
-        $input = 'input/books.jrxml';
+        $input = 'input/grouped_books.jrxml';
         $output = 'output';
         $options = [
-            'format' => ['pdf'],
+            'format' => ['pdf', 'html'],
             'locale' => 'en',
             'params' => [],
             'db_connection' => [
@@ -39,38 +39,21 @@ class Report
             ]
         ];
 
-        $x = $this->PHPJasper->process(
-            $input,
-            $output,
-            $options
-        )->output();
+        // $x = $this->PHPJasper->process(
+        //     $input,
+        //     $output,
+        //     $options
+        // )->output();
 
-        print_r($x);
+        // print_r($x);
 
-        $this->PHPJasper->process(
-            $input,
-            $output,
-            $options
-        )->execute();
+        // $this->PHPJasper->clearCompile(); // Clear the cache
 
-
-        // Replace 'path/to/your/pdf/file.pdf' with the actual path to your PDF file
-        $filePath = __DIR__ . 'output/books.pdf';
-
-        // Check if the file exists
-        if (file_exists($filePath)) {
-            // Set the appropriate headers to force the browser to open the file in a new tab
-            header('Content-Type: application/pdf');
-            header('Content-Disposition: inline; filename="file.pdf"');
-            header('Content-Length: ' . filesize($filePath));
-
-            // Output the PDF file content
-            readfile($filePath);
-
-        } else {
-            // Handle the case when the file is not found
-            echo 'The PDF file does not exist.';
-        }
+        // $this->PHPJasper->process(
+        //     $input,
+        //     $output,
+        //     $options
+        // )->execute();
 
         // go back to index page
         header('Location: index.php');
